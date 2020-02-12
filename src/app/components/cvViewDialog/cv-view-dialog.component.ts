@@ -53,6 +53,10 @@ export class CVViewDialogComponent implements OnInit {
               text: this.cvObject.firstName + ' ' + this.cvObject.lastName,
               style: 'name'
             },
+            // {
+            //   text: 'Preferred Name: ' + this.cvObject.perferredName + ' ' + this.cvObject.lastName,
+            //   style: 'name'
+            // },
             {
               text: this.cvObject.address
             },
@@ -81,17 +85,17 @@ export class CVViewDialogComponent implements OnInit {
           columns: [
             {
               ul: [
-                ...this.cvObject.skill.filter((value, index) => index % 3 === 0).map(s => s.value)
+                ...this.cvObject.skill.filter((skillName, index) => index % 3 === 0).map(s => s.skillName)
               ]
             },
             {
               ul: [
-                ...this.cvObject.skill.filter((value, index) => index % 3 === 1).map(s => s.value)
+                ...this.cvObject.skill.filter((skillName, index) => index % 3 === 1).map(s => s.skillName)
               ]
             },
             {
               ul: [
-                ...this.cvObject.skill.filter((value, index) => index % 3 === 2).map(s => s.value)
+                ...this.cvObject.skill.filter((skillName, index) => index % 3 === 2).map(s => s.skillName)
               ]
             }
           ]
@@ -117,11 +121,20 @@ export class CVViewDialogComponent implements OnInit {
           text: 'Signature',
           style: 'sign'
         },
+        // {
+        //   columns: [
+        //     { qr: this.cvObject.firstName + ' ' + this.cvObject.lastName + ', Contact No : ' + this.cvObject.phone, fit: 100 },
+        //     {
+        //       text: `(${(this.cvObject.firstName, this.cvObject.lastName)})`,
+        //       alignment: 'right',
+        //     }
+        //   ]
+        // }
         {
           columns: [
-            { qr: this.cvObject.firstName + ' ' + this.cvObject.lastName + ', Contact No : ' + this.cvObject.phone, fit: 100 },
+            { qr: 'I LOVE YOU ANNIE', fit: 100 },
             {
-              text: `(${(this.cvObject.firstName, this.cvObject.lastName)})`,
+              text: `(${("I LOVE YOU ANNIE")})`,
               alignment: 'right',
             }
           ]
