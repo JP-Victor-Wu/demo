@@ -121,20 +121,11 @@ export class CVViewDialogComponent implements OnInit {
           text: 'Signature',
           style: 'sign'
         },
-        // {
-        //   columns: [
-        //     { qr: this.cvObject.firstName + ' ' + this.cvObject.lastName + ', Contact No : ' + this.cvObject.phone, fit: 100 },
-        //     {
-        //       text: `(${(this.cvObject.firstName, this.cvObject.lastName)})`,
-        //       alignment: 'right',
-        //     }
-        //   ]
-        // }
         {
           columns: [
-            { qr: 'I LOVE YOU ANNIE', fit: 100 },
+            { qr: this.cvObject.firstName + ' ' + this.cvObject.lastName + ', Contact No : ' + this.cvObject.phone, fit: 100 },
             {
-              text: `(${("I LOVE YOU ANNIE")})`,
+              text: `(${(this.cvObject.firstName, this.cvObject.lastName)})`,
               alignment: 'right',
             }
           ]
