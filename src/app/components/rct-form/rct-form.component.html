@@ -1,0 +1,50 @@
+<div class="container mt-3">
+    <form [formGroup]="profileForm">
+        <mat-form-field appearance="fill">
+            <mat-label>FirstName<br> </mat-label>
+            <input matInput formControlName="firstName">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>LastName<br> </mat-label>
+            <input matInput formControlName="lastName">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Preferred Name<br> </mat-label>
+            <input matInput formControlName="preferredName">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Phone Number(NZ)<br> </mat-label>
+            <input matInput formControlName="phoneNum">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Email<br> </mat-label>
+            <input matInput formControlName="emailAddress">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Physical Address<br> </mat-label>
+            <input matInput formControlName="phyAddress">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>LinkedIn Account<br> </mat-label>
+            <input matInput formControlName="linkedinAcc">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Github Account<br> </mat-label>
+            <input matInput formControlName="githubAcc">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button type="submit" (click)="onSubmit()" class="mt-2 mb-2">Submit</button><br>
+    </form>
+    <pre>
+    {{profileForm.value | json}}
+  </pre>
+</div>
+
+<!-- <button (click)="updateProfile()">Update Profile</button> -->

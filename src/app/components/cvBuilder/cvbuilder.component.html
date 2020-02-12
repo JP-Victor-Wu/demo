@@ -1,0 +1,304 @@
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <!-- Start of reactive form -->
+            <div [formGroup]="cvForm">
+                <mat-card>
+                    <mat-card-title>Basic information</mat-card-title>
+                    <mat-card-content>
+                        <div class="row">
+                            <!-- First name -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>First name</mat-label><input matInput formControlName="firstName">
+                            </mat-form-field>
+
+                            <!-- Last name -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Last name</mat-label><input matInput formControlName="lastName">
+                            </mat-form-field>
+
+                            <!-- Perferred name  -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Perferred name</mat-label><input matInput formControlName="perferredName">
+                            </mat-form-field>
+
+                            <!-- Phone number (NZ)-->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Phone number (NZ)</mat-label><input matInput formControlName="phone">
+                            </mat-form-field>
+
+                            <!-- Email address -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Email address</mat-label><input matInput formControlName="email">
+                            </mat-form-field>
+
+                            <!-- Linkedin Account -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Linkedin account</mat-label><input matInput formControlName="linkedin">
+                            </mat-form-field>
+
+                            <!-- Github account -->
+                            <mat-form-field class="w-auto p-3">
+                                <mat-label>Github account</mat-label><input matInput formControlName="github">
+                            </mat-form-field>
+
+                            <!-- Physical address (NZ)-->
+                            <mat-form-field class="w-50 p-3">
+                                <mat-label>Physical address (NZ) </mat-label><input matInput formControlName="address">
+                            </mat-form-field>
+
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <!-- Personal statement -->
+                <mat-card>
+                    <mat-card-title>Personal statement</mat-card-title>
+                    <mat-card-content>
+
+                        <mat-form-field class="w-100 p-3">
+                            <mat-label>Personal statement</mat-label><textarea matInput
+                                formControlName="statement"> </textarea>
+                        </mat-form-field>
+
+                    </mat-card-content>
+                </mat-card>
+
+                <br>
+                <!-- Add technical skill -->
+                <mat-card>
+                    <mat-card-title>Skills</mat-card-title>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-6 p-3" formArrayName="skill"
+                                *ngFor="let skill of cvForm.get('skill').controls; let i = index;">
+                                <div [formGroupName]="i">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Skill name</mat-label><input matInput formControlName="skillName">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-flat-button color="primary" (click)="addSkillItem()">Add skills</button>
+
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>Work experience</mat-card-title>
+                    <mat-card-content>
+
+                        <div formArrayName="work" *ngFor="let work of cvForm.get('work').controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <div class="row">
+                                    <!-- Name of organization -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Work organization name</mat-label><input matInput
+                                            formControlName="workName">
+                                    </mat-form-field>
+
+                                    <!-- Title of position  -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Work title</mat-label><input matInput formControlName="workTitle">
+                                    </mat-form-field>
+
+                                    <!-- Start date picker  -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Work start date</mat-label>
+                                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="workStart"
+                                            formControlName="workStart">
+                                        <mat-datepicker-toggle matSuffix [for]="workStart"></mat-datepicker-toggle>
+                                        <mat-datepicker #workStart></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <!-- End date picker -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Work end date</mat-label>
+                                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="workEnd"
+                                            formControlName="workEnd">
+                                        <mat-datepicker-toggle matSuffix [for]="workEnd"></mat-datepicker-toggle>
+                                        <mat-datepicker #workEnd></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <!-- Short description of work situation and duties (max 2 sentences) -->
+                                    <mat-form-field class="w-100 p-3">
+                                        <mat-label>Work description or situation</mat-label><input matInput
+                                            formControlName="workDescription">
+                                    </mat-form-field>
+
+                                    <!-- What are the tasks you did and what achievements/contributions did you make? (Max 6 ) -->
+                                    <!-- Form array start  -->
+                                    <div class="w-75" formArrayName="workTasks"
+                                        *ngFor="let workTasks of work.get('workTasks').controls; let i = index;">
+                                        <div [formGroupName]="i">
+
+                                            <mat-form-field class="w-100 p-3">
+                                                <mat-label>Work task or achievement </mat-label><input matInput
+                                                    formControlName="task">
+                                            </mat-form-field>
+
+                                        </div>
+                                    </div>
+                                    <button mat-mini-fab color="primary" (click)="addWorkTaskItem(work)">+</button>
+
+                                    <!-- Short description of work situation and duties (max 2 sentences) -->
+                                    <mat-form-field class="w-100 p-3">
+                                        <mat-label>What other experiences did you gain that may benifit future employers
+                                        </mat-label>
+                                        <input matInput formControlName="workOtherExp">
+                                    </mat-form-field>
+                                </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                        <button mat-flat-button color="primary" (click)="addWorkItem()">Add work experience</button>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+
+                <!-- Time and duration -->
+                <!-- Qualifications gained  -->
+                <!-- Main honors (distinctions) received -->
+                <!-- Detailed honors received -->
+                <!-- Detail of relevant course information -->
+                <mat-card>
+                    <mat-card-title>Education history</mat-card-title>
+                    <mat-card-content>
+
+
+                        <div formArrayName="edu" *ngFor="let edu of cvForm.get('edu').controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <div class="row">
+                                    <!-- Name of School -->
+
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Institution name</mat-label><input matInput
+                                            formControlName="eduName">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Qualification title with honors (if any)</mat-label><input matInput
+                                            formControlName="eduQualification">
+                                    </mat-form-field>
+
+                                    <!-- Start date picker  -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Education start date</mat-label>
+                                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="eduStart"
+                                            formControlName="eduStart">
+                                        <mat-datepicker-toggle matSuffix [for]="eduStart"></mat-datepicker-toggle>
+                                        <mat-datepicker #eduStart></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <!-- End date picker -->
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Education end date</mat-label>
+                                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="eduEnd"
+                                            formControlName="eduEnd">
+                                        <mat-datepicker-toggle matSuffix [for]="eduEnd"></mat-datepicker-toggle>
+                                        <mat-datepicker #eduEnd></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="w-100 p-3">
+                                        <mat-label>Education Description</mat-label><input matInput
+                                            formControlName="eduDescription">
+                                    </mat-form-field>
+
+                                    <div class="w-75" formArrayName="eduInfos"
+                                        *ngFor="let eduInfos of edu.get('eduInfos').controls; let i = index;">
+                                        <div [formGroupName]="i">
+
+                                            <mat-form-field class="w-100 p-3">
+                                                <mat-label>Education information</mat-label><input matInput
+                                                    formControlName="info">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-mini-fab color="primary" (click)="addEduInfoItem(edu)">+</button>
+
+                                </div>
+                            </div>
+                            <hr>
+
+                        </div>
+                        <button mat-flat-button color="primary" (click)="addEduItem()">Add education experience</button>
+
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>Interest and others</mat-card-title>
+                    <mat-card-content>
+
+
+                        <div formArrayName="interest"
+                            *ngFor="let interest of cvForm.get('interest').controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <div class="row">
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Interest name</mat-label><input matInput
+                                            formControlName="interestName">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="w-75 p-3">
+                                        <mat-label>Interest description</mat-label><input matInput
+                                            formControlName="interestDescription">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-flat-button color="primary" (click)="addInterestItem()">Add interest &
+                            other</button>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>References</mat-card-title>
+                    <mat-card-content>
+
+
+                        <div formArrayName="reference"
+                            *ngFor="let reference of cvForm.get('reference').controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <div class="row">
+
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Reference Name</mat-label><input matInput
+                                            formControlName="referenceName">
+                                    </mat-form-field>
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Reference position and organisation</mat-label><input matInput formControlName="referenceTitle">
+                                    </mat-form-field>
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Reference phone num</mat-label><input matInput formControlName="referencePhone">
+                                    </mat-form-field>
+                                    <mat-form-field class="w-auto p-3">
+                                        <mat-label>Reference email add</mat-label><input matInput formControlName="referenceEmail">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-flat-button color="primary" (click)="addReferenceItem()">Add reference</button>
+                    </mat-card-content>
+                </mat-card>
+
+
+            </div>
+        </div>
+        <div class="col-12 col-md-2">
+
+            <mat-card style="position: -webkit-sticky; position: sticky; top: 70px;">
+                <mat-card-title>Actions</mat-card-title>
+                <mat-card-content>
+                    <button mat-flat-button color="warn" (click)="saveForm()">Save CV</button>
+                    <br><br>
+                    <button mat-flat-button color="warn" (click)="viewCV()">View CV</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<br><br>

@@ -1,0 +1,20 @@
+<div class="container mt-3 ">
+    <form [formGroup]="inputForm">
+
+        <div formArrayName="details" *ngFor="let field of inputForm.get('details').controls; let ind = index;">
+
+            <ng-container [formGroupName]="ind">
+                <mat-form-field appearance="fill">
+                    <mat-label>Type Anything</mat-label>
+                    <input matInput formControlName="record">
+                </mat-form-field>
+                <button *ngIf="ind > 0" mat-raised-button color="warn" class="ml-3"
+                    (click)="remove(ind)">Remove</button>
+
+            </ng-container>
+
+        </div>
+
+    </form>
+    <button mat-raised-button color="accent" (click)="add()">Add more...</button>
+</div>

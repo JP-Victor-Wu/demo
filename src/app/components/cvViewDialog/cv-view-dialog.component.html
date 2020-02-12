@@ -1,0 +1,123 @@
+<div class="container" id="cvComponent" #cvComponent>
+
+    <div class="mat-display-3 m-auto">
+        {{cvObject.firstName}} <span *ngIf="cvObject.perferredName"> ( {{cvObject.perferredName}} )</span>
+        {{cvObject.lastName}}
+    </div><br>
+    <div class="row mat-subtitle">
+        <div class="col">
+            {{cvObject.email}}
+        </div>
+        <div class="col">
+            P: {{cvObject.phone}}
+        </div>
+        <div class="col">
+            Address: {{cvObject.address}}
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-2 mat-headline">
+            Summary
+        </div>
+        <div class="col-10">
+            {{cvObject.statement}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2 mat-headline">
+            Skills
+        </div>
+        <div class="col-10">
+            <ul *ngFor="let skill of cvObject.skill">
+                <li style="list-style: none;">{{skill.skillName}} </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2 mat-headline">
+            Work Experience
+        </div>
+        <div class="col-10">
+            <div *ngFor="let work of cvObject.work">
+                <div>
+                    <b>From: </b> {{work.workStart}} <b> To: </b> {{work.workEnd}}
+                </div>
+                <div *ngFor="let task of work.workTasks">
+                    <p>
+                        Work Name: {{work.workName}} || Work Title: {{work.workTitle}} <br>
+                        Description: {{work.workDescription}} <br>
+                        Work task/achievement:
+                        <li class="ml-2"> {{task.task}} </li>
+                        Gain from the work: {{work.workOtherExp}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2 mat-headline">
+            Education History
+        </div>
+        <div class="col-10">
+            <div *ngFor="let edu of cvObject.edu">
+                <div>
+                    <b>From: </b> {{edu.eduStart}} <b> To: </b> {{edu.eduEnd}}
+                </div>
+                <div *ngFor="let info of edu.eduInfos">
+                    <p>
+                        Institution Name: {{edu.eduName}} || Qualification Title: {{edu.eduQualification}} <br>
+                        Description: {{edu.eduDescription}} <br>
+                        Education Information:
+                        <li class="ml-2"> {{info.info}} </li>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2 mat-headline">
+            Personal Interest
+        </div>
+        <div class="col-10">
+            <div *ngFor="let interest of cvObject.interest">
+                <b>{{interest.interestName}}</b><br>
+                Description: {{interest.interestDescription}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2 mat-headline">
+            References
+        </div>
+        <div class="col-10">
+            <div *ngFor="let ref of cvObject.reference">
+                Reference Name: {{ref.referenceName}} || Reference Title: {{ref.referenceTitle}} <br>
+                Phone: {{ref.referencePhone}} <br>
+                Email: {{ref.referenceEmail}}
+
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="card action-buttons mx-auto" style="width: 200px;">
+    <button (click)=" generatePdf('open')" class="btn btn-primary d-flex align-items-center justify-content-center my-2">
+        <i class="material-icons">
+            picture_as_pdf
+        </i> <span>Open PDF</span></button>
+    <button (click)=" generatePdf('download')" class="btn btn-primary d-flex align-items-center justify-content-center my-2">
+        <i class="material-icons">
+            cloud_download
+        </i><span>Download PDF</span></button>
+    <button (click)=" generatePdf('print')" class="btn btn-primary d-flex align-items-center justify-content-center my-2">
+        <i class="material-icons">
+            print
+        </i><span>Print PDF</span></button>
+</div>
